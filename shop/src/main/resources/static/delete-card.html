@@ -1,0 +1,21 @@
+<!--
+http://localhost:8080/delete-card.html
+-->
+
+<script type="text/javascript">
+    function deleteCard()
+    {
+        // получить cardId и name из полей формы
+        var cardId = document.getElementById("id").value;
+        // создать url
+        var url = "/cards/" + cardId;
+        var xhr = new XMLHttpRequest();
+        xhr.open("DELETE", url, true);
+        // просто вызвать метод не передавая данные в виде body
+        xhr.send(null);
+    }
+</script>
+<form name="myform">
+    <input type="text" id="id" name="id"/><br/>
+</form>
+<button type="button" onclick="deleteCard();">Delete</button>

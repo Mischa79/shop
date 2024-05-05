@@ -1,0 +1,36 @@
+<!--
+http://localhost:8080/update-card.html
+-->
+
+<script type="text/javascript">
+
+    function updateCard()
+    {
+        // получить cardId и name из полей формы
+        var cardId = document.getElementById("id").value;
+        var cardName = document.getElementById("name").value;
+        // сформировать url для запроса - "/cards/" + cardId
+        var url = "/cards/" + cardId;
+
+        // сформировать json для отправки на сервер { "name": "новое имя" }
+        var card = {};
+        card.name = cardName;
+        // делаем из объекта card строку для отправки на сервер
+        var json = JSON.stringify(card);
+        // создать объект для посылки запросов, параметризовав его HTTP методом PUT
+        var xhr = new XMLHttpRequest();
+        xhr.open("PUT", url, true);
+        xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+        xhr.send(json);
+    }
+</script>
+<form name="myform">
+    <input type="text" id="id" name="id"/><br/>
+    <input type="text" id="name" name="name"/><br/>
+</form>
+<!--
+кнопка не должна быть в форме
+так как в этом случае кнопка будет передавать форму на сервер
+методом GET а не вызывать функцию javascript
+-->
+<button type="button" onclick="updateCard();">Update</button>
